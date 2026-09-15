@@ -7,10 +7,10 @@ interface RosterEntry {
 }
 
 // AmethyxGG
-import AmethriaVioletweave from "./characters/amethria_violetweave";
-import AmethyxVioletweave from "./characters/amethyx_violetweave";
+import AmethriaVioletweave from "./characters/amethyx/amethria_violetweave";
+import AmethyxVioletweave from "./characters/amethyx/amethyx_violetweave";
 // Chris
-// Luke
+// Bella (Luke)
 // Gaz
 
 const roster: RosterEntry[] = []
