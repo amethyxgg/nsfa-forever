@@ -16,7 +16,7 @@ const recruitment = [
 <div class="widget">
     <p class="widget-title">Recruitment</p>
     <div class="widget-content">
-        <p>We are always looking for new members to join our guild!</p>
+        <p class="text-sm">We are always looking for new members to join our guild!</p>
     </div>
     <table>
             <thead>
@@ -28,8 +28,8 @@ const recruitment = [
             <tbody>
                 {recruitment.map((r) => (
                     <tr>
-                        <td class={`fg-${lcFirst(r.class)}`}>{r.class}</td>
-                        <td class={`fg-status-${lcFirst(r.status)}`}>{r.status}</td>
+                        <td class={`text-sm fg-${lcFirst(r.class)}`}>{r.class}</td>
+                        <td class={`text-sm fg-status-${lcFirst(r.status)}`}>{r.status}</td>
                     </tr>
                 ))}
             </tbody>
