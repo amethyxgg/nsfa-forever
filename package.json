@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "update:data": "git -c core.protectNTFS=false subtree pull --prefix=src/wow-forever-data https://github.com/amethyxgg/wow-forever-data main --squash",
-    "update:media": "git -c core.protectNTFS=false subtree pull --prefix=src/assets/wow-forever-media https://github.com/amethyxgg/wow-forever-media.git main --squash"
+    "update:media": "git -c core.protectNTFS=false subtree pull --prefix=public/wow-forever-media https://github.com/amethyxgg/wow-forever-media.git main --squash"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.1",
