@@ -1,0 +1,70 @@
+---
+const { character, player } = Astro.props;
+
+
+
+const bgImage = character.image ? `url(${character.image})` : `url(/assets/wow-forever-media/classes/${character.wowclass.name.toLowerCase()}.png)`;
+
+---
+
+<style>
+        .roster {
+            display: grid;
+            grid-template-columns: repeat(8, minmax(0, 1fr));
+            gap: 0.5rem;
+        }
+
+        .roster-character {
+            border: 3px solid var(--theme-bg-darkest);
+            border-radius: 16px;
+            min-width: 0;
+        }
+
+        .roster-character--image {
+            background: var(--image);
+            height: 100px;
+        }
+
+        .roster-character--header {
+            background: var(--theme-bg-darkest);
+            padding: .25rem .5rem;
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+        }
+
+        .roster-character--footer {
+            background: var(--theme-bg-darkest);
+            padding: .25rem .5rem;
+            border-bottom-left-radius: 13px;
+            border-bottom-right-radius: 13px;
+        }
+
+        .alts {
+            margin-top: 0.5rem;
+        }
+
+        .is-hidden {
+            display: none;
+        }
+    </style>
+<div class="roster-character" data-roster-character data-character-name={character.name} data-player-name={player.player} data-character-class={character.wowclass.name}>
+    <div class="roster-character--header">
+        <p class={`text-sm fg-${character.wowclass.css}`}>
+            {character.name}
+        </p>
+    </div>
+
+    <div class="roster-character--image" style={`--image: ${bgImage};`}></div>
+
+    <div class="roster-character--footer">
+        <p class="text-sm">
+            Level {character.level} <span class={`fg-${character.wowclass.css}`}>
+                {character.wowclass.name}
+            </span>
+        </p>
+
+        <p class={`text-sm fg-${player.rank.toLowerCase()}`}>
+            {player.player}
+        </p>
+    </div>    
+</div>

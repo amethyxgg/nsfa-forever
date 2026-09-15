@@ -2,6 +2,7 @@
 import type { Character } from '../wow-forever-data/types/Character';
 import wowClasses from '../wow-forever-data/data/classes';
 import Page from '../layouts/Page.astro';
+import CharacterCard from '../components/roster/CharacterCard.astro';
 
 import roster from '../data/roster';
 
@@ -89,45 +90,15 @@ const classes = Object.values(wowClasses).sort((a, b) => a.name.localeCompare(b.
         <section class="roster" data-roster-section>
             
             {mains.map(({ player, character }) => (
-                <div class="roster-character" data-roster-character data-character-name={character.name} data-player-name={player.player} data-character-class={character.wowclass.name}>
-                    <p class={`fg-${character.wowclass.css}`}>
-                        {character.name}
-                    </p>
-
-                        <p class="text-sm">
-                            Level {character.level} <span class={`fg-${character.wowclass.css}`}>
-                                {character.wowclass.name}
-                            </span>
-                        </p>
-
-                        <p class={`text-sm fg-${player.rank.toLowerCase()}`}>
-                            {player.player}
-                        </p>
-                    </div>
-                ))
-            }
+                <CharacterCard character={character} player={player} />
+            ))}
         </section>
 
         <h1>Alts</h1>
         <section class="roster" data-roster-section>
             {alts.map(({ player, character }) => (
-                <div class="roster-character" data-roster-character data-character-name={character.name} data-player-name={player.player} data-character-class={character.wowclass.name}>
-                    <p class={`fg-${character.wowclass.css}`}>
-                        {character.name}
-                    </p>
-
-                        <p class="text-sm">
-                            Level {character.level} <span class={`fg-${character.wowclass.css}`}>
-                                {character.wowclass.name}
-                            </span>
-                        </p>
-
-                        <p class={`text-sm fg-${player.rank.toLowerCase()}`}>
-                            {player.player}
-                        </p>
-                    </div>
-                ))
-            }
+                <CharacterCard character={character} player={player} />
+            ))}
         </section>
         <p id="roster-empty" class="is-hidden" aria-live="polite">No characters match your search.</p>
     </main>
