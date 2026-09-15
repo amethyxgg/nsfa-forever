@@ -1,0 +1,37 @@
+---
+const lcFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)
+const ucFirst = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+const recruitment = [
+    { class: 'Druid', status: 'Open' },
+    { class: 'Hunter', status: 'Open' },
+    { class: 'Mage', status: 'Open' },
+    { class: 'Paladin', status: 'Open' },
+    { class: 'Priest', status: 'Open' },
+    { class: 'Rogue', status: 'Open' },
+    { class: 'Shaman', status: 'Open' },
+    { class: 'Warlock', status: 'Open' },
+    { class: 'Warrior', status: 'Open' }
+]
+---
+<div class="widget">
+    <p class="widget-title">Recruitment</p>
+    <div class="widget-content">
+        <p>We are always looking for new members to join our guild!</p>
+    </div>
+    <table>
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {recruitment.map((r) => (
+                    <tr>
+                        <td class={`fg-${lcFirst(r.class)}`}>{r.class}</td>
+                        <td class={`fg-status-${lcFirst(r.status)}`}>{r.status}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+</div>

@@ -61,12 +61,13 @@ body {
 	line-height: 1.7;
 }
 
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+.main-aside {
+	margin: 3rem 5rem;
+	display: grid;
+	grid-template-columns: 9fr 3fr;
+	gap: 1rem;
 }
+
 h1,
 h2,
 h3,
@@ -170,4 +171,55 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.fg-warrior { color: var(--class-warrior); }
+.fg-paladin { color: var(--class-paladin); }
+.fg-hunter { color: var(--class-hunter); }
+.fg-rogue {	color: var(--class-rogue); }
+.fg-priest { color: var(--class-priest); }
+.fg-warlock { color: var(--class-warlock); }
+.fg-shaman { color: var(--class-shaman); }
+.fg-mage { color: var(--class-mage); }
+.fg-druid { color: var(--class-druid); }
+.fg-status-open { color: var(--wow-guild); }
+
+.widget {
+	background: var(--theme-bg);
+	border: 1px solid var(--theme-bg-darkest);
+}
+
+.widget-title {
+	font-size: 1.5rem;
+	margin: 0;
+	padding: .25rem 1rem;
+	background: var(--theme-bg-darkest);
+}
+
+.widget-content {
+	padding: 1rem;
+	margin: 0;
+}
+
+.widget p {
+	margin: 0;
+}
+
+.widget table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.widget thead {
+	background: var(--theme-bg-darkest);
+}
+
+.widget th,
+.widget td {
+	padding: .5rem;
+	text-align: left;
+}
+
+.widget td {
+	border-bottom: 1px solid var(--theme-bg-darkest);
 }
