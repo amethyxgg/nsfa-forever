@@ -1,5 +1,6 @@
 ---
 import type { Character } from '../wow-forever-data/types/Character';
+import wowClasses from '../wow-forever-data/data/classes';
 import Page from '../layouts/Page.astro';
 
 import roster from '../data/roster';
@@ -18,6 +19,8 @@ const alts = roster.flatMap((player: any) =>
         .slice(1)
         .map((character: Character) => ({ player, character }))
 );
+
+const classes = Object.values(wowClasses).sort((a, b) => a.name.localeCompare(b.name));
 
 ---
 
@@ -41,14 +44,50 @@ const alts = roster.flatMap((player: any) =>
             padding: 0.5rem;
             min-width: 0;
         }
+
+        .roster-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .roster-filters input,
+        .roster-filters select {
+            padding: 0.5rem 0.75rem;
+        }
+
+        .roster-filters input {
+            flex: 1 1 16rem;
+        }
+
+        .roster-filters select {
+            flex: 0 1 12rem;
+        }
+
+        .alts {
+            margin-top: 0.5rem;
+        }
+
+        .is-hidden {
+            display: none;
+        }
     </style>
 
     <h1>Roster</h1>
 
     <main>
-        <section class="roster">
+        <div class="roster-filters" aria-label="Roster filters">
+            <input id="roster-search" type="search" placeholder="Search character or player" aria-label="Search character or player" />
+            <select id="class-filter" aria-label="Filter by character class">
+                <option value="">All classes</option>
+                {classes.map((wowclass) => <option value={wowclass.name}>{wowclass.name}</option>)}
+            </select>
+        </div>
+
+        <section class="roster" data-roster-section>
             {mains.map(({ player, character }) => (
-                <div class="roster-character">
+                <div class="roster-character" data-roster-character data-character-name={character.name} data-player-name={player.player} data-character-class={character.wowclass.name}>
                     <p class={`fg-${character.wowclass.css}`}>
                         {character.name}
                     </p>
@@ -67,9 +106,9 @@ const alts = roster.flatMap((player: any) =>
             }
         </section>
 
-        <section class="alts">
+        <section class="alts" data-roster-section>
             {alts.map(({ player, character }) => (
-                <div class="roster-character">
+                <div class="roster-character" data-roster-character data-character-name={character.name} data-player-name={player.player} data-character-class={character.wowclass.name}>
                     <p class={`fg-${character.wowclass.css}`}>
                         {character.name}
                     </p>
@@ -85,5 +124,39 @@ const alts = roster.flatMap((player: any) =>
                 ))
             }
         </section>
+        <p id="roster-empty" class="is-hidden" aria-live="polite">No characters match your search.</p>
     </main>
 </Page>
+
+<script>
+    const search = document.querySelector<HTMLInputElement>('#roster-search');
+    const classFilter = document.querySelector<HTMLSelectElement>('#class-filter');
+    const characters = document.querySelectorAll<HTMLElement>('[data-roster-character]');
+    const sections = document.querySelectorAll<HTMLElement>('[data-roster-section]');
+    const emptyMessage = document.querySelector<HTMLElement>('#roster-empty');
+
+    const filterRoster = () => {
+        const query = search?.value.trim().toLowerCase() ?? '';
+        const selectedClass = classFilter?.value ?? '';
+        let visibleCharacters = 0;
+
+        characters.forEach((character) => {
+            const matchesSearch = !query
+                || character.dataset.characterName?.toLowerCase().includes(query)
+                || character.dataset.playerName?.toLowerCase().includes(query);
+            const matchesClass = !selectedClass || character.dataset.characterClass === selectedClass;
+            const isVisible = matchesSearch && matchesClass;
+
+            character.classList.toggle('is-hidden', !isVisible);
+            if (isVisible) visibleCharacters += 1;
+        });
+
+        sections.forEach((section) => {
+            section.classList.toggle('is-hidden', !section.querySelector('[data-roster-character]:not(.is-hidden)'));
+        });
+        emptyMessage?.classList.toggle('is-hidden', visibleCharacters > 0);
+    };
+
+    search?.addEventListener('input', filterRoster);
+    classFilter?.addEventListener('change', filterRoster);
+</script>
