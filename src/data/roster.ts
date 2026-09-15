@@ -8,6 +8,7 @@ interface RosterEntry {
 
 // AmethyxGG
 import AmethriaVioletweave from "./characters/amethria_violetweave";
+import AmethyxVioletweave from "./characters/amethyx_violetweave";
 // Chris
 // Luke
 // Gaz
@@ -17,7 +18,8 @@ const roster: RosterEntry[] = []
 roster.push({
     player: "Amethyx (Dani)",
     characters: [
-        AmethriaVioletweave
+        AmethyxVioletweave,
+        AmethriaVioletweave,
     ],
     rank: GuildRank.Officer
 })
