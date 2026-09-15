@@ -86,15 +86,14 @@ const classes = Object.values(wowClasses).sort((a, b) => a.name.localeCompare(b.
             </select>
         </div>
 
-        <h1>Mains</h1>
+        <h2>Mains</h2>
         <section class="roster" data-roster-section>
-            
             {mains.map(({ player, character }) => (
                 <CharacterCard character={character} player={player} />
             ))}
         </section>
 
-        <h1>Alts</h1>
+        <h2>Alts</h2>
         <section class="roster" data-roster-section>
             {alts.map(({ player, character }) => (
                 <CharacterCard character={character} player={player} />

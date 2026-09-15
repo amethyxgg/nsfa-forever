@@ -3,40 +3,44 @@ const { character, player } = Astro.props;
 
 
 
-const bgImage = character.image ? `url(${character.image})` : `url(/assets/wow-forever-media/classes/${character.wowclass.name.toLowerCase()}.png)`;
+const bgImage = character.image ? `url(${character.image})` : `url(/wow-forever-media/classes/${character.wowclass.name.toLowerCase()}.png)`;
 
 ---
 
 <style>
         .roster {
             display: grid;
-            grid-template-columns: repeat(8, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 0.5rem;
+        }
+
+        @media (max-width: 1280px) {
+            .roster {
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+            }
         }
 
         .roster-character {
             border: 3px solid var(--theme-bg-darkest);
-            border-radius: 16px;
             min-width: 0;
         }
 
         .roster-character--image {
             background: var(--image);
-            height: 100px;
+            height: min(calc(100vw / 8), 180px);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .roster-character--header {
             background: var(--theme-bg-darkest);
             padding: .25rem .5rem;
-            border-top-left-radius: 13px;
-            border-top-right-radius: 13px;
         }
 
         .roster-character--footer {
             background: var(--theme-bg-darkest);
             padding: .25rem .5rem;
-            border-bottom-left-radius: 13px;
-            border-bottom-right-radius: 13px;
         }
 
         .alts {
