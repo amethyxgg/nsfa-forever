@@ -3,6 +3,7 @@ import type { Character } from '../wow-forever-data/types/Character';
 import wowClasses from '../wow-forever-data/data/classes';
 import Page from '../layouts/Page.astro';
 import CharacterCard from '../components/roster/CharacterCard.astro';
+import Roster from '../components/Roster';
 
 import roster from '../data/roster';
 
@@ -22,6 +23,7 @@ const alts = roster.flatMap((player: any) =>
 );
 
 const classes = Object.values(wowClasses).sort((a, b) => a.name.localeCompare(b.name));
+
 
 ---
 
@@ -86,40 +88,9 @@ const classes = Object.values(wowClasses).sort((a, b) => a.name.localeCompare(b.
             </select>
         </div> -->
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Character</th>
-                    <th>Race</th>
-                    <th>Class</th>
-                    <th>Level</th>
-                    <th>Player</th>
-                    <th>Main?</th>
-                </tr>
-            </thead>
-            {mains.map(({ player, character }) => (
-                <tr>
-                    <td class={`fg-${character.wowclass.css}`}>{character.name}</td>
-                    <td class={`fg-${character.wowclass.css}`}>{character.race}</td>
-                    <td class={`fg-${character.wowclass.css}`}>{character.wowclass.name}</td>
-                    <td class={`fg-${character.wowclass.css}`}>{character.level}</td>
-                    <td class={`fg-${player.rank.toLowerCase()}`}>{player.player}</td>
-                    <td class={`fg-${player.rank.toLowerCase()}`}>Main</td>
-                </tr>
-                // <CharacterCard character={character} player={player} />
-            ))}
-            {alts.map(({ player, character }) => (
-                <tr>
-                    <td class={`fg-${character.wowclass.css}`}>{character.name}</td>
-                    <td class={`fg-${character.wowclass.css}`}>{character.race}</td>
-                    <td class={`fg-${character.wowclass.css}`}>{character.wowclass.name}</td>
-                    <td class={`fg-${character.wowclass.css}`}>{character.level}</td>
-                    <td class={`fg-${player.rank.toLowerCase()}`}>{player.player}</td>
-                    <td class={`fg-${player.rank.toLowerCase()}`}>Alt</td>
-                </tr>
-                // <CharacterCard character={character} player={player} />
-            ))}
-        </table>
+        <Roster mains={mains} alts={alts} client:only="solid-js" />
+
+        
 
         <p id="roster-empty" class="is-hidden" aria-live="polite">No characters match your search.</p>
     </main>
