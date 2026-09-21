@@ -1,4 +1,5 @@
 import GuildRank from "./GuildRank";
+import { Characters } from "./characters";
 
 interface RosterEntry {
     player: string;
@@ -6,9 +7,6 @@ interface RosterEntry {
     rank: GuildRank;
 }
 
-// AmethyxGG
-import AmethriaVioletweave from "./characters/amethyx/amethria_violetweave";
-import AmethyxVioletweave from "./characters/amethyx/amethyx_violetweave";
 // Chris
 // Bella (Luke)
 // Gaz
@@ -18,8 +16,8 @@ const roster: RosterEntry[] = []
 roster.push({
     player: "Amethyx (Dani)",
     characters: [
-        AmethyxVioletweave,
-        AmethriaVioletweave,
+        Characters.Amethyx.AmethyxVioletshade,
+        Characters.Amethyx.AmethyxVioletweave,
     ],
     rank: GuildRank.Officer
 })

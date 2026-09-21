@@ -1,0 +1,107 @@
+---
+import type { Character, ProfessionProgress, WowProfession } from '../wow-forever-data/types/Character';
+import Page from '../layouts/Page.astro';
+import roster from '../data/roster';
+
+type ProfessionLeader = {
+    profession: WowProfession;
+    progress: ProfessionProgress;
+    character: Character;
+    player: (typeof roster)[number];
+};
+
+const professionNames: Record<WowProfession, string> = {
+    alchemy: 'Alchemy',
+    blacksmithing: 'Blacksmithing',
+    enchanting: 'Enchanting',
+    engineering: 'Engineering',
+    leatherworking: 'Leatherworking',
+    tailoring: 'Tailoring',
+    skinning: 'Skinning',
+    herbalism: 'Herbalism',
+    mining: 'Mining',
+    cooking: 'Cooking',
+    fishing: 'Fishing',
+};
+
+const leaders = new Map<WowProfession, ProfessionLeader>();
+
+for (const player of roster) {
+    for (const character of player.characters ?? []) {
+        for (const [profession, progress] of Object.entries(character.professions ?? {}) as [WowProfession, ProfessionProgress][]) {
+            const currentLeader = leaders.get(profession);
+
+            if (!currentLeader || progress.skill > currentLeader.progress.skill) {
+                leaders.set(profession, { profession, progress, character, player });
+            }
+        }
+    }
+}
+
+const professionLeaders = [...leaders.values()]
+    .sort((a, b) => professionNames[a.profession].localeCompare(professionNames[b.profession]));
+---
+
+<Page>
+    <style>
+        .professions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            gap: 0.75rem;
+        }
+
+        .profession {
+            display: grid;
+            grid-template-columns: 4rem 1fr;
+            gap: 0.75rem;
+            align-items: center;
+            border: 3px solid var(--theme-bg-darkest);
+            padding: 0.75rem;
+            min-width: 0;
+        }
+
+        .profession-icon {
+            width: 4rem;
+            height: 4rem;
+            object-fit: cover;
+        }
+
+        .profession h2,
+        .profession p {
+            margin: 0;
+        }
+
+        .profession p + p {
+            margin-top: 0.25rem;
+        }
+    </style>
+
+    <h1>Professions</h1>
+
+    <main>
+        {professionLeaders.length ? (
+            <section class="professions" aria-label="Profession leaders">
+                {professionLeaders.map(({ profession, progress, character, player }) => (
+                    <article class="profession">
+                        <img
+                            class="profession-icon"
+                            src={`/wow-forever-media/professions/${profession}.png`}
+                            alt=""
+                        />
+                        <div>
+                            <h2>{professionNames[profession]}</h2>
+                            <p>
+                                {character.name} <span class={`fg-${character.wowclass.css}`}>({character.wowclass.name})</span>
+                            </p>
+                            <p class={`text-sm fg-${player.rank.toLowerCase()}`}>
+                                {player.player} · {progress.skill}{progress.cap ? ` / ${progress.cap}` : ''}
+                            </p>
+                        </div>
+                    </article>
+                ))}
+            </section>
+        ) : (
+            <p>No profession progress has been added to the roster yet.</p>
+        )}
+    </main>
+</Page>
