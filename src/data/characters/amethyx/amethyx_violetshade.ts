@@ -3,7 +3,7 @@ import { Mage } from "../../../wow-forever-data/data/classes/mage";
 import { Race } from "../../../wow-forever-data/enum/Race";
 
 export const AmethyxVioletshade: Character = {
-    name: "Amethyx Violetshade", // "Amethyx Violetweave",
+    name: "Amethyx Violetshade",
     wowclass: Mage,
     race: Race.Troll,
     level: 1,

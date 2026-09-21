@@ -3,7 +3,7 @@ import { Druid } from "../../../wow-forever-data/data/classes/druid";
 import { Race } from "../../../wow-forever-data/enum/Race";
 
 export const AmethyxVioletguard: Character = {
-    name: "Amethyx Violetguard", // "Amethyx Violetweave",
+    name: "Amethyx Violetguard",
     race: Race.Skyborne,
     wowclass: Druid,
     level: 1,
