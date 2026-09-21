@@ -100,7 +100,7 @@ const classes = Object.values(wowClasses).sort((a, b) => a.name.localeCompare(b.
                 <tr>
                     <td class={`fg-${character.wowclass.css}`}>{character.name}</td>
                     <td class={`fg-${character.wowclass.css}`}>{character.wowclass.name}</td>
-                    <td>{character.level}</td>
+                    <td class={`fg-${character.wowclass.css}`}>{character.level}</td>
                     <td class={`fg-${player.rank.toLowerCase()}`}>{player.player}</td>
                     <td class={`fg-${player.rank.toLowerCase()}`}>Main</td>
                 </tr>
