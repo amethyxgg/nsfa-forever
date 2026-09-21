@@ -2,7 +2,9 @@ import ROLES from '@amethyxgg/wow-forever-data/Roles';
 import type { WoWClass } from '@amethyxgg/wow-forever-data/WoWClass'
 
 export const Mage: WoWClass = {
-  name: 'Mage', css: 'mage', roles: [ ROLES.DPS ],
+  name: 'Mage',
+  css: 'mage',
+  roles: [ ROLES.DPS ],
   img: '/img/wow/classes/mage/mage.png',
   specs: [
     {
