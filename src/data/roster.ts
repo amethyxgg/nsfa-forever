@@ -17,7 +17,7 @@ roster.push({
     player: "Amethyx (Dani)",
     characters: [
         Characters.Amethyx.AmethyxVioletshade,
-        Characters.Amethyx.AmethyxVioletweave,
+        Characters.Amethyx.AmethyxVioletguard,
     ],
     rank: GuildRank.Officer
 })
