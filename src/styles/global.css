@@ -32,8 +32,8 @@
 	--theme-text-1: #ececec;
 	--theme-text-hue: hsl(var(--theme-hue), 100%, 80%);
 
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
+	--accent: hsl(var(--theme-hue), 100%, 40%);
+	--accent-dark: hsl(var(--theme-hue), 100%, 25%);
 	--box-shadow:
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
